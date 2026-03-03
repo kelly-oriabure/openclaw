@@ -1,6 +1,6 @@
 services:
   openclaw:
-    command: [ "openclaw", "gateway" ]
+    command: openclaw gateway
     build: .
     environment:
       - 'GITHUB_TOKEN=${GITHUB_TOKEN}'
