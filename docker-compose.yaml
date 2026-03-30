@@ -36,7 +36,7 @@ services:
       - 'OLLAMA_BASE_URL=${OLLAMA_BASE_URL}'
       - PORT=8080
       - OPENCLAW_GATEWAY_PORT=18789
-      - 'OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND:-loopback}'
+      - 'OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND:-lan}'
       - OPENCLAW_STATE_DIR=/data/.openclaw
       - OPENCLAW_WORKSPACE_DIR=/data/workspace
       - 'BROWSER_CDP_URL=http://browser:9222'
@@ -47,8 +47,8 @@ services:
       - 'BROWSER_REMOTE_HANDSHAKE_TIMEOUT_MS=${BROWSER_REMOTE_HANDSHAKE_TIMEOUT_MS:-3000}'
       - 'HOOKS_ENABLED=${HOOKS_ENABLED:-false}'
       - 'HOOKS_PATH=${HOOKS_PATH:-/hooks}'
-      - 'MOONSHOT_BASE_URL=${MOONSHOT_BASE_URL:-https://api.moonshot.ai/v1}'
-      - 'KIMI_BASE_URL=${KIMI_BASE_URL:-https://api.moonshot.ai/anthropic}'
+      - 'MOONSHOT_BASE_URL=${MOONSHOT_BASE_URL:-https://api.moonshot.cn}'
+      - 'KIMI_BASE_URL=${KIMI_BASE_URL:-https://api.moonshot.cn}'
       - TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
       - DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
       - SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN
