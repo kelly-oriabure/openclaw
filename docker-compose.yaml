@@ -56,6 +56,7 @@ services:
       - WHATSAPP_ENABLED=$WHATSAPP_ENABLED
       - OPENCLAW_DOCKER_APT_PACKAGES=$OPENCLAW_DOCKER_APT_PACKAGES
       - OPENCLAW_SANDBOX=1
+      - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
       - 'openclaw-data:/data'
       - '/dev/shm:/dev/shm'
@@ -100,6 +101,40 @@ services:
       timeout: 5s
       retries: 10
 
+  paperclip:
+    image: obehiaye/paperclip:latest
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3100
+      - SERVE_UI=true
+      - PAPERCLIP_HOME=/paperclip
+      - PAPERCLIP_INSTANCE_ID=default
+      - PAPERCLIP_CONFIG=/paperclip/instances/default/config.json
+      - PAPERCLIP_DEPLOYMENT_MODE=authenticated
+      - PAPERCLIP_DEPLOYMENT_EXPOSURE=private
+      - PAPERCLIP_PUBLIC_URL=https://paperclip.firmoncloud.com
+      - PAPERCLIP_AUTH_BASE_URL_MODE=explicit
+      - PAPERCLIP_ALLOWED_HOSTNAMES=paperclip.firmoncloud.com
+      - PAPERCLIP_DB_CONNECTION_STRING=postgresql://postgres:Obehiaye%40kcv76@db.erjijqqywmzfsrxgeuhk.supabase.co:5432/postgres
+      - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
+    volumes:
+      - paperclip-data:/paperclip
+    ports:
+      - '3101:3100'
+    depends_on:
+      openclaw:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - '-sf'
+        - 'http://127.0.0.1:3100/api/health'
+      interval: 30s
+      timeout: 10s
+
 volumes:
   openclaw-data:
   browser-data:
+  paperclip-data:
