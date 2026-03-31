@@ -115,6 +115,7 @@ services:
       - DATABASE_URL=postgresql://neondb_owner:npg_ou2hlK7gIzbx@ep-shy-frog-ad02q0uh-pooler.c-2.us-east-1.aws.neon.tech/paperclip2?sslmode=require&channel_binding=require
     volumes:
       - paperclip-data:/paperclip
+      - openclaw-data:/data
     ports:
       - '3101:3100'
     depends_on:
