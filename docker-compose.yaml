@@ -104,6 +104,9 @@ services:
 
   paperclip:
     image: obehiaye/paperclip:latest
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     environment:
       - NODE_ENV=production
       - HOST=0.0.0.0
