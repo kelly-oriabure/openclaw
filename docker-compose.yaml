@@ -120,8 +120,8 @@ services:
       - PAPERCLIP_PUBLIC_URL=https://paperclip.firmoncloud.com
       - PAPERCLIP_AUTH_BASE_URL_MODE=explicit
       - PAPERCLIP_ALLOWED_HOSTNAMES=paperclip.firmoncloud.com
-      - PAPERCLIP_DB_CONNECTION_STRING=postgresql://postgres.erjijqqywmzfsrxgeuhk:Obehiaye%40kcv76@aws-0-us-east-1.pooler.supabase.com:6543/postgres
-      - DATABASE_URL=postgresql://postgres.erjijqqywmzfsrxgeuhk:Obehiaye%40kcv76@aws-0-us-east-1.pooler.supabase.com:6543/postgres
+      - PAPERCLIP_DB_CONNECTION_STRING=postgresql://postgres:Obehiaye%40kcv76@db.erjijqqywmzfsrxgeuhk.supabase.co:5432/postgres
+      - DATABASE_URL=postgresql://postgres:Obehiaye%40kcv76@db.erjijqqywmzfsrxgeuhk.supabase.co:5432/postgres
       - BETTER_AUTH_SECRET=pc-secret-kcv76-paperclip-openclaw-2026-long-random-key
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
@@ -141,6 +141,13 @@ services:
       timeout: 10s
       retries: 5
       start_period: 60s
+
+networks:
+  default:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "fd00:dead:beef::/48"
 
 volumes:
   openclaw-data:
