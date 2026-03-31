@@ -104,15 +104,9 @@ services:
 
   paperclip:
     image: obehiaye/paperclip:latest
-    entrypoint: ["/bin/sh", "-c"]
-    command:
-      - |
-        mkdir -p /paperclip/instances/default
-        if [ ! -f /paperclip/instances/default/config.json ]; then
-          echo '{"database":{"mode":"postgres","connectionString":"postgresql://neondb_owner:npg_ou2hlK7gIzbx@ep-shy-frog-ad02q0uh-pooler.c-2.us-east-1.aws.neon.tech/paperclip2?sslmode=require&channel_binding=require"},"instance":{"name":"Paperclip","publicUrl":"https://paperclip.firmoncloud.com"},"auth":{"baseHostname":"paperclip.firmoncloud.com","baseUrlMode":"explicit","secret":"pc-secret-kcv76-paperclip-openclaw-2026-long-random-key"},"deployment":{"mode":"authenticated","exposure":"private"},"api":{"allowedHostnames":["paperclip.firmoncloud.com"]}}' > /paperclip/instances/default/config.json
-          echo "Created config.json"
-        fi
-        exec node cli/node_modules/tsx/dist/cli.mjs cli/src/index.ts serve
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     environment:
       - NODE_ENV=production
       - HOST=0.0.0.0
