@@ -104,7 +104,7 @@ services:
 
   paperclip:
     image: obehiaye/paperclip:latest
-    entrypoint: ["sh", "-c", "mkdir -p /paperclip/instances/default && echo '{\"database\":{\"mode\":\"postgres\",\"connectionString\":\"postgresql://neondb_owner:npg_ou2hlK7gIzbx@ep-shy-frog-ad02q0uh-pooler.c-2.us-east-1.aws.neon.tech/paperclip2?sslmode=require&channel_binding=require\"},\"instance\":{\"name\":\"Paperclip\",\"publicUrl\":\"https://paperclip.firmoncloud.com\"},\"auth\":{\"baseHostname\":\"paperclip.firmoncloud.com\",\"baseUrlMode\":\"explicit\",\"secret\":\"pc-secret-kcv76-paperclip-openclaw-2026-long-random-key\"},\"deployment\":{\"mode\":\"authenticated\",\"exposure\":\"private\"},\"api\":{\"allowedHostnames\":[\"paperclip.firmoncloud.com\"]}}' > /paperclip/instances/default/config.json && exec pnpm paperclipai serve"]
+    entrypoint: ["sh", "-c", "mkdir -p /paperclip/instances/default && echo '{\"database\":{\"mode\":\"postgres\",\"connectionString\":\"postgresql://neondb_owner:npg_ou2hlK7gIzbx@ep-shy-frog-ad02q0uh-pooler.c-2.us-east-1.aws.neon.tech/paperclip2?sslmode=require&channel_binding=require\"},\"instance\":{\"name\":\"Paperclip\",\"publicUrl\":\"https://paperclip.firmoncloud.com\"},\"auth\":{\"baseHostname\":\"paperclip.firmoncloud.com\",\"baseUrlMode\":\"explicit\",\"secret\":\"pc-secret-kcv76-paperclip-openclaw-2026-long-random-key\"},\"deployment\":{\"mode\":\"authenticated\",\"exposure\":\"private\"},\"api\":{\"allowedHostnames\":[\"paperclip.firmoncloud.com\"]}}' > /paperclip/instances/default/config.json && exec pnpm paperclipai run"]
     environment:
       - NODE_ENV=production
       - HOST=0.0.0.0
