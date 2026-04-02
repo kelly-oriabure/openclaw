@@ -102,40 +102,9 @@ services:
       timeout: 5s
       retries: 10
 
-  paperclip:
-    image: obehiaye/paperclip:latest
-    environment:
-      - NODE_ENV=production
-      - HOST=0.0.0.0
-      - PORT=3100
-      - SERVE_UI=true
-      - PAPERCLIP_HOME=/paperclip
-      - PAPERCLIP_INSTANCE_ID=default
-      - PAPERCLIP_CONFIG=/paperclip/instances/default/config.json
-      - DATABASE_URL=postgresql://neondb_owner:npg_ou2hlK7gIzbx@ep-shy-frog-ad02q0uh-pooler.c-2.us-east-1.aws.neon.tech/paperclip2?sslmode=require&channel_binding=require
-    volumes:
-      - paperclip-data:/paperclip
-      - openclaw-data:/data
-    ports:
-      - '3101:3100'
-    depends_on:
-      openclaw:
-        condition: service_healthy
-    healthcheck:
-      test:
-        - CMD
-        - curl
-        - '-sf'
-        - 'http://127.0.0.1:3100/api/health'
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-
 networks:
   default:
 
 volumes:
   openclaw-data:
   browser-data:
-  paperclip-data:
