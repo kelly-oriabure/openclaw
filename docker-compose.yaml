@@ -51,8 +51,8 @@ services:
       - 'KIMI_BASE_URL=${KIMI_BASE_URL:-https://api.moonshot.cn}'
       - 'XIAOMI_OPENAI_BASE_URL=${XIAOMI_OPENAI_BASE_URL:-https://api.xiaomimimo.com/v1}'
       - 'XIAOMI_ANTHROPIC_BASE_URL=${XIAOMI_ANTHROPIC_BASE_URL:-https://api.xiaomimimo.com/anthropic}'
-      - 'XIAOMI_OPENAI_TOKEN_BASE_URL=${XIAOMI_OPENAI_BASE_URL:-https://token-plan-sgp.xiaomimimo.com/v1}'
-      - 'XIAOMI_ANTHROPIC_TOKEN_BASE_URL=${XIAOMI_ANTHROPIC_BASE_URL:-https://token-plan-sgp.xiaomimimo.com/anthropic}'
+      - 'XIAOMI_OPENAI_TOKEN_BASE_URL=${XIAOMI_OPENAI_TOKEN_BASE_URL:-https://token-plan-sgp.xiaomimimo.com/v1}'
+      - 'XIAOMI_ANTHROPIC_TOKEN_BASE_URL=${XIAOMI_ANTHROPIC_TOKEN_BASE_URL:-https://token-plan-sgp.xiaomimimo.com/anthropic}'
       - TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
       - DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
       - SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN
