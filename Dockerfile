@@ -1,8 +1,5 @@
 FROM coollabsio/openclaw:2026.3.8
 
-# Fix Xiaomi baseUrl (built-in has wrong URL)
-RUN find /opt/openclaw/app/dist -name "*.js" -exec sed -i 's|https://api.xiaomimimo.com/anthropic|https://token-plan-sgp.xiaomimimo.com/anthropic|g' {} +
-
 RUN apt-get update \
     && apt-get install -y curl gnupg nano git build-essential wget unzip \
     # Playwright/Chromium dependencies
