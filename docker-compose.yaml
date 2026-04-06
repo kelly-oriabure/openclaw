@@ -60,6 +60,7 @@ services:
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
       - 'openclaw-data:/data'
+      - '/data/.openclaw/openclaw.json:/data/.openclaw/openclaw.json:rw'
       - '/dev/shm:/dev/shm'
     shm_size: '2gb' # ✓ Service-level property, NOT a volume
     cap_add:
