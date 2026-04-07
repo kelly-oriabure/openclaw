@@ -1,4 +1,4 @@
-FROM coollabsio/openclaw:2026.3.8
+FROM coollabsio/openclaw:2026.4.5
 
 # Fix Xiaomi baseUrl (built-in has wrong default URL)
 RUN find /opt/openclaw/app/dist -name "*.js" -exec sed -i \
