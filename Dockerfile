@@ -1,5 +1,12 @@
 FROM coollabsio/openclaw:2026.3.8
 
+# Fix Xiaomi baseUrl (built-in has wrong default URL)
+RUN find /opt/openclaw/app/dist -name "*.js" -exec sed -i \
+    -e 's|https://api\.xiaomimimo\.com/anthropic|https://token-plan-sgp.xiaomimimo.com/anthropic|g' \
+    -e 's|https://api\.xiaomimimo\.com/v1|https://token-plan-sgp.xiaomimimo.com/v1|g' \
+    {} + \
+    && echo "Xiaomi baseUrl patched successfully"
+
 RUN apt-get update \
     && apt-get install -y curl gnupg nano git build-essential wget unzip \
     # Playwright/Chromium dependencies
