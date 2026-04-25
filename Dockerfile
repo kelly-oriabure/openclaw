@@ -1,4 +1,4 @@
-FROM coollabsio/openclaw:2026.4.20
+FROM coollabsio/openclaw:2026.4.24
 
 RUN apt-get update \
     && apt-get install -y curl gnupg nano git build-essential wget unzip \
