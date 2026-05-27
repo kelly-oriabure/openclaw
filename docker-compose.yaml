@@ -72,22 +72,22 @@ services:
       retries: 5
       start_period: 90s
 
-browser:
-  image: coollabsio/openclaw-browser:0.3.0
-  environment:
-    - PUID=1000
-    - PGID=1000
-    - TZ=Etc/UTC
-    - 'CHROME_CLI=--remote-debugging-port=9222 --no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu'
-  volumes:
-    - 'browser-vol:/config'
-  healthcheck:
-    test:
-      - CMD-SHELL
-      - "bash -c ':> /dev/tcp/127.0.0.1/9222' || exit 1"
-    interval: 5s
-    timeout: 5s
-    retries: 10
+  browser:
+    image: coollabsio/openclaw-browser:0.3.0
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - 'CHROME_CLI=--remote-debugging-port=9222 --no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu'
+    volumes:
+      - 'browser-vol:/config'
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - "bash -c ':> /dev/tcp/127.0.0.1/9222' || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 volumes:
   openclaw-data:
