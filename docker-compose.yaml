@@ -1,7 +1,7 @@
 services:
   openclaw:
     command: openclaw gateway
-    build: coollabsio/openclaw:2026.5.20
+    image: coollabsio/openclaw:2026.5.20
     environment:
       - 'GITHUB_TOKEN=${GITHUB_TOKEN}'
       - SERVICE_FQDN_OPENCLAW_8080
