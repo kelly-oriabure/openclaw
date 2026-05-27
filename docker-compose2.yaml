@@ -8,6 +8,26 @@ services:
       - AUTH_USERNAME=$SERVICE_USER_OPENCLAW
       - AUTH_PASSWORD=$SERVICE_PASSWORD_OPENCLAW
       - OPENCLAW_GATEWAY_TOKEN=$SERVICE_PASSWORD_64_GATEWAYTOKEN
+      - 'ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}'
+      - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
+      - 'OPENROUTER_API_KEY=${OPENROUTER_API_KEY}'
+      - 'GEMINI_API_KEY=${GEMINI_API_KEY}'
+      - 'XAI_API_KEY=${XAI_API_KEY}'
+      - 'GROQ_API_KEY=${GROQ_API_KEY}'
+      - 'MISTRAL_API_KEY=${MISTRAL_API_KEY}'
+      - 'CEREBRAS_API_KEY=${CEREBRAS_API_KEY}'
+      - 'VENICE_API_KEY=${VENICE_API_KEY}'
+      - 'MOONSHOT_API_KEY=${MOONSHOT_API_KEY}'
+      - 'KIMI_API_KEY=${KIMI_API_KEY}'
+      - 'MINIMAX_API_KEY=${MINIMAX_API_KEY}'
+      - 'ZAI_API_KEY=${ZAI_API_KEY}'
+      - 'AI_GATEWAY_API_KEY=${AI_GATEWAY_API_KEY}'
+      - 'OPENCODE_API_KEY=${OPENCODE_API_KEY}'
+      - 'SYNTHETIC_API_KEY=${SYNTHETIC_API_KEY}'
+      - 'COPILOT_GITHUB_TOKEN=${COPILOT_GITHUB_TOKEN}'
+      - 'XIAOMI_API_KEY=${XIAOMI_API_KEY}'
+      - 'XIAOMI_ANTHROPIC_BASE_URL=https://token-plan-sgp.xiaomimimo.com/anthropic'
+      - 'XIAOMI_OPENAI_BASE_URL=https://token-plan-sgp.xiaomimimo.com/v1'
       - 'OPENCLAW_PRIMARY_MODEL=${OPENCLAW_PRIMARY_MODEL}'
       - 'DEEPGRAM_API_KEY=${DEEPGRAM_API_KEY}'
       - 'AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}'
@@ -29,12 +49,24 @@ services:
       - 'BROWSER_REMOTE_HANDSHAKE_TIMEOUT_MS=${BROWSER_REMOTE_HANDSHAKE_TIMEOUT_MS:-3000}'
       - 'HOOKS_ENABLED=${HOOKS_ENABLED:-false}'
       - 'HOOKS_PATH=${HOOKS_PATH:-/hooks}'
+      - 'MOONSHOT_BASE_URL=${MOONSHOT_BASE_URL:-https://api.moonshot.cn}'
+      - 'KIMI_BASE_URL=${KIMI_BASE_URL:-https://api.moonshot.cn}'
+      - TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
+      - DISCORD_BOT_TOKEN=$DISCORD_BOT_TOKEN
+      - SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN
+      - SLACK_APP_TOKEN=$SLACK_APP_TOKEN
+      - WHATSAPP_ENABLED=$WHATSAPP_ENABLED
       - OPENCLAW_DOCKER_APT_PACKAGES=$OPENCLAW_DOCKER_APT_PACKAGES
       - OPENCLAW_SANDBOX=1
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
       - 'openclaw-data:/data'
       - '/dev/shm:/dev/shm'
+    shm_size: '2gb' # ✓ Service-level property, NOT a volume
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
     depends_on:
       browser:
         condition: service_healthy
@@ -59,6 +91,11 @@ services:
     volumes:
       - 'browser-data:/config'
       - '/dev/shm:/dev/shm'
+    shm_size: '2gb' # ✓ Service-level property
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
     healthcheck:
       test:
         - CMD-SHELL
