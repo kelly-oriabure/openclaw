@@ -1,20 +1,25 @@
 FROM coollabsio/openclaw:2026.5.20
+# Or use coollabsio/openclaw:2026.5.22 if you want the current image.
 
-RUN apt-get update \
-    && apt-get install -y curl gnupg nano git build-essential wget unzip \
-    # Playwright/Chromium dependencies
-    libnss3 libatk-bridge2.0-0 libxcomposite1 libxrandr2 libasound2 \
-    libpangocairo-1.0-0 libatspi2.0-0 libgtk-3-0 libgbm1 libdrm2 libxshmfence1 \
-    && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-    | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-    && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
-    | tee /etc/apt/sources.list.d/github-cli.list \
-    && apt-get update \
-    && apt-get install -y gh \
-    && gh --version \
-    # Install Playwright properly then install Chromium browser
-    && npm install -g @playwright/test \
-    && npx playwright install chromium \
-    # Clean up apt cache and npm cache
-    && rm -rf /var/lib/apt/lists/* /root/.npm
+ARG PLAYWRIGHT_VERSION=1.60.0
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      ca-certificates curl nano wget unzip; \
+    install -d -m 0755 /etc/apt/keyrings /etc/apt/sources.list.d; \
+    curl -fsSL -o /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+      https://cli.github.com/packages/githubcli-archive-keyring.gpg; \
+    chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg; \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+      > /etc/apt/sources.list.d/github-cli.list; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends gh; \
+    NPM_CONFIG_PREFIX=/usr/local npm install -g "@playwright/test@${PLAYWRIGHT_VERSION}"; \
+    playwright install --with-deps chromium; \
+    gh --version; \
+    playwright --version; \
+    rm -rf /var/lib/apt/lists/* /root/.npm
