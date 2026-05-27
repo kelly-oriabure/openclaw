@@ -57,7 +57,7 @@ services:
       - OPENCLAW_SANDBOX=1
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
-      - 'openclaw-data:/data'
+      - 'openclaw-vol:/data'
     depends_on:
       browser:
         condition: service_healthy
@@ -90,5 +90,5 @@ services:
       retries: 10
 
 volumes:
-  openclaw-data:
+  openclaw-vol:
   browser-vol:
