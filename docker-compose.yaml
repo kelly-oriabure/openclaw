@@ -34,7 +34,6 @@ services:
       - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1
     volumes:
       - 'openclaw-data:/data'
-      - '/dev/shm:/dev/shm'
     depends_on:
       browser:
         condition: service_healthy
@@ -58,7 +57,6 @@ services:
       - 'CHROME_CLI=--remote-debugging-port=9222 --no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage --disable-gpu'
     volumes:
       - 'browser-data:/config'
-      - '/dev/shm:/dev/shm'
     healthcheck:
       test:
         - CMD-SHELL
